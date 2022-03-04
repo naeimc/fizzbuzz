@@ -13,27 +13,32 @@ var first float64
 var last float64
 var increment float64
 var separator string
+var pattern string
 var help bool
 
 const (
-	USAGE             = "%s [-help] [-f first_number] [-l last_number] [-s separator] [-i increment_amount]\n"
+	USAGE             = "%s [-help] [-f first_number] [-l last_number] [-s separator] [-i increment_amount] [-p pattern]\n"
 	HELP_NOTIFICATION = "Run \"fizzbuzz -help\" for more information"
 
 	FIRST_FLAGS   = "f first"
 	FIRST_DEFAULT = 1.0
-	FIRST_USAGE   = "the first number <float>"
+	FIRST_USAGE   = "the first number <integer>"
 
 	LAST_FLAGS   = "l last"
 	LAST_DEFAULT = 100.0
-	LAST_USAGE   = "the last number <float>"
+	LAST_USAGE   = "the last number <integer>"
 
 	INCREMENT_FLAGS   = "i increment"
 	INCREMENT_DEFAULT = 1.0
-	INCREMENT_USAGE   = "how much to increment the value by <float>"
+	INCREMENT_USAGE   = "how much to increment the value by <integer>"
 
 	SEPARATOR_FLAGS   = "s separator"
 	SEPARATOR_DEFAULT = "\n"
 	SEPARATOR_USAGE   = "the separator between each string <string>"
+
+	PATTERN_FLAGS   = "p pattern"
+	PATTERN_DEFAULT = "%0.f"
+	PATTERN_USAGE   = "the pattern used to format the number"
 
 	HELP_FLAGS   = "h help"
 	HELP_DEFAULT = false
@@ -58,6 +63,10 @@ func init() {
 		flag.StringVar(&separator, s, SEPARATOR_DEFAULT, SEPARATOR_USAGE)
 	}
 
+	for _, s := range strings.Split(PATTERN_FLAGS, " ") {
+		flag.StringVar(&pattern, s, PATTERN_DEFAULT, PATTERN_USAGE)
+	}
+
 	for _, s := range strings.Split(HELP_FLAGS, " ") {
 		flag.BoolVar(&help, s, HELP_DEFAULT, HELP_USAGE)
 	}
@@ -77,7 +86,7 @@ func main() {
 
 	switch command {
 	case "":
-		fb := fizzbuzz.NewFizzBuzzer(first, increment)
+		fb := fizzbuzz.NewFizzBuzzer(first, increment, pattern)
 		fb.AddCheck(3.0, "Fizz")
 		fb.AddCheck(5.0, "Buzz")
 		if first > last {
@@ -103,7 +112,8 @@ func showHelp() {
 	args = append(args, [3]string{FIRST_FLAGS, FIRST_USAGE, fmt.Sprint(FIRST_DEFAULT)})
 	args = append(args, [3]string{LAST_FLAGS, LAST_USAGE, fmt.Sprint(LAST_DEFAULT)})
 	args = append(args, [3]string{INCREMENT_FLAGS, INCREMENT_USAGE, fmt.Sprint(INCREMENT_DEFAULT)})
-	args = append(args, [3]string{SEPARATOR_FLAGS, SEPARATOR_USAGE, fmt.Sprint(SEPARATOR_DEFAULT)})
+	args = append(args, [3]string{SEPARATOR_FLAGS, SEPARATOR_USAGE, SEPARATOR_DEFAULT})
+	args = append(args, [3]string{PATTERN_FLAGS, PATTERN_USAGE, PATTERN_DEFAULT})
 	args = append(args, [3]string{HELP_FLAGS, HELP_USAGE, fmt.Sprint(HELP_DEFAULT)})
 
 	fmt.Print("A FizzBuzz utility.\n\n")

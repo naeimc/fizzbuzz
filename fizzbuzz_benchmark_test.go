@@ -3,7 +3,7 @@ package fizzbuzz
 import "testing"
 
 func BenchmarkFizzBuzzer_Next(b *testing.B) {
-	fb := NewFizzBuzzer(1.0, 1.0)
+	fb := NewFizzBuzzer(1.0, 1.0, "%0.f")
 	fb.AddCheck(3.0, "Fizz")
 	fb.AddCheck(5.0, "Buzz")
 	b.ResetTimer()

@@ -31,16 +31,17 @@ func (c *Checker) Check(dividend float64) string {
 	return ""
 }
 
-// A FizzBuzser
+// A FizzBuzzer
 type FizzBuzzer struct {
 	Value     float64   // The current value to fizzbuzz.
 	Increment float64   // What to increment the current value by after a successful FizzBuzz.
+	Pattern   string    // The format to present the number by.
 	Checks    []Checker // The checks to run while FizzBuzzing.
 }
 
 // Create a new FizzBuzz utility.
-func NewFizzBuzzer(start float64, increment float64) *FizzBuzzer {
-	return &FizzBuzzer{Value: start, Increment: increment}
+func NewFizzBuzzer(start float64, increment float64, pattern string) *FizzBuzzer {
+	return &FizzBuzzer{Value: start, Increment: increment, Pattern: pattern}
 }
 
 // Add a check to the fizzbuzz utility.
@@ -59,7 +60,7 @@ func (fb *FizzBuzzer) Next() string {
 		out += c.Check(fb.Value)
 	}
 	if out == "" {
-		out = fmt.Sprintf("%0.f", fb.Value)
+		out = fmt.Sprintf(fb.Pattern, fb.Value)
 	}
 	fb.Value += fb.Increment
 	return out

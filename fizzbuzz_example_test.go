@@ -5,8 +5,9 @@ import "fmt"
 func Example() {
 	start := 1.0
 	increment := 1.0
+	pattern := "%0.f"
 
-	fb := NewFizzBuzzer(start, increment)
+	fb := NewFizzBuzzer(start, increment, pattern)
 
 	fb.AddCheck(3.0, "Fizz")
 	fb.AddCheck(5.0, "Buzz")
