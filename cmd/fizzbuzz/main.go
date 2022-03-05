@@ -22,15 +22,15 @@ const (
 
 	FIRST_FLAGS   = "f first"
 	FIRST_DEFAULT = 1.0
-	FIRST_USAGE   = "the first number <integer>"
+	FIRST_USAGE   = "the first number <float64>"
 
 	LAST_FLAGS   = "l last"
 	LAST_DEFAULT = 100.0
-	LAST_USAGE   = "the last number <integer>"
+	LAST_USAGE   = "the last number <float64>"
 
 	INCREMENT_FLAGS   = "i increment"
 	INCREMENT_DEFAULT = 1.0
-	INCREMENT_USAGE   = "how much to increment the value by <integer>"
+	INCREMENT_USAGE   = "how much to increment the value by <float64>"
 
 	SEPARATOR_FLAGS   = "s separator"
 	SEPARATOR_DEFAULT = "\n"
